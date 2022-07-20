@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 const booksName = ["กินเล่น เช่นไทย", "โอชะแห่งล้านนา"];
-test.only("test No. 8", async ({ page }) => {
+test("test No. 8", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
   await page.waitForLoadState("networkidle");
   await page.locator("[title*='ตำราอาหารยอดนิยม']").click();
@@ -11,7 +11,7 @@ test.only("test No. 8", async ({ page }) => {
   await expect(page.locator(".xoo-wsch-text")).toHaveText("Your Cart");
   await expect(page.locator(".xoo-wsc-pname")).toHaveText(booksName[0]);
   // await page.pause();
-  await expect(page.locator(".xoo-wscb-count")).toHaveText("3");
+  await expect(page.locator(".xoo-wscb-count")).toHaveText("1");
   await expect(page.locator(".xoo-wsc-ft-amt bdi")).toHaveText("382 ฿");
 });
 
@@ -78,4 +78,45 @@ test("test No. 10", async ({ page }) => {
   await page.pause();
 });
 
-// .xoo-wsc-icon-trash
+test.only("test No. 11 Payment Page", async ({ page }) => {
+  await page.goto("https://www.sangdad.com/shop/");
+  await page.waitForLoadState("networkidle");
+  await page.locator("[title*='ตำราอาหารยอดนิยม']").click();
+  await page.locator("#post-4814").click();
+
+  await page.locator("button.single_add_to_cart_button").click({ delay: 300 });
+  await expect(page.locator(".xoo-wsch-text")).toHaveText("Your Cart");
+  await expect(page.locator(".xoo-wsc-pname")).toHaveText(booksName[0]);
+  await expect(page.locator(".xoo-wscb-count")).toHaveText("1");
+  await expect(page.locator(".xoo-wsc-ft-amt bdi")).toHaveText("382 ฿");
+  await page.goBack();
+  await page.locator("#post-989").click();
+  await page.locator("button.single_add_to_cart_button").click({ delay: 500 });
+  await expect(page.locator(".xoo-wscb-count")).toHaveText("2");
+
+  const countBooks = await page.locator(".xoo-wsc-pname").count();
+  for (let i = 0; i < countBooks; ++i) {
+    const title = page.locator(".xoo-wsc-pname").nth(i);
+    await expect(title).toHaveText(booksName[i]);
+    // console.log(booksName[i]);
+  }
+  await expect(page.locator(".xoo-wsc-ft-amt bdi")).toHaveText("782 ฿");
+
+  for (let i = 0; i < countBooks; ++i) {
+    if (
+      (await page.locator(".xoo-wsc-pname").nth(i).textContent()) ===
+      booksName[0]
+    ) {
+      await page.locator(".xoo-wsc-icon-trash").nth(i).click();
+      break;
+    }
+  }
+
+  await expect(page.locator(".xoo-wsc-ft-amt bdi")).toHaveText("400 ฿");
+  await expect(page.locator(".xoo-wscb-count")).toHaveText("1");
+  await page.locator(".xoo-wsc-ft-btn-cart").click();
+  const amount = page.locator("[data-title*='มูลค่า']");
+  await expect(amount).toHaveText("400 ฿");
+  await page.locator("#menu-1-18869fb .menu-item-2778").click();
+  await page.pause();
+});
