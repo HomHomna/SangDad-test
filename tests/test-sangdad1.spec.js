@@ -14,7 +14,7 @@ test.only("book kid 2", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
   await page.waitForLoadState("networkidle");
   await page.locator(".cat-item-408").click();
-  // await page.pause();
+  await page.pause();
   const books = page.locator("article[id*='post']");
   await books.first().waitFor();
   const allBooks = await books

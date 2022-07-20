@@ -4,7 +4,7 @@ const { test, expect } = require("@playwright/test");
 const booksName = ["ไทยจานโปรด", "อาหารไทยจานเด็ด", "อาหารสุขภาพ บ้านคุณนิดดา"];
 const priceBooks = ["440 ฿", "150 ฿", "236 ฿"];
 
-test.only("check amount total books in first page and search book ไทยจานโปรด", async ({
+test("check amount total books in first page and search book ไทยจานโปรด", async ({
   page,
 }) => {
   await page.goto("https://www.sangdad.com/shop/");
@@ -21,7 +21,7 @@ test.only("check amount total books in first page and search book ไทยจ�
   const allPrice = await books
     .locator("ins .woocommerce-Price-amount")
     .allTextContents();
-  await expect(allPrice.find((y) => y === allBooks[index])).toBeTruthy();
+  await expect(allPrice.find((x) => x === allPrice[index])).toBeTruthy();
 });
 
 test("check amount books in 15th page", async ({ page }) => {
@@ -40,10 +40,16 @@ test("search book อาหารจานเด็ด", async ({ page }) => {
   const allBooks = await books
     .locator(".elementor-heading-title")
     .allTextContents();
-  expect(allBooks.find((x) => x === booksName[1])).toBeTruthy();
+  expect(allBooks.find((x) => x === booksName[1])).toBeFalsy();
+  const index = allBooks.findIndex((x) => x === booksName[1]);
+  console.log(index);
+  const allPrice = await books
+    .locator("ins .woocommerce-Price-amount")
+    .allTextContents();
+  await expect(allPrice.find((x) => x === allPrice[index])).toBeFalsy();
 });
 
-test("search สุขภาพ in search tag", async ({ page }) => {
+test.only("search สุขภาพ in search tag", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
   await page.locator("input#dgwt-wcas-search-input-12c2").fill("สุขภาพ");
   await page.locator("input#dgwt-wcas-search-input-12c2").press("Enter");
@@ -54,4 +60,9 @@ test("search สุขภาพ in search tag", async ({ page }) => {
     .locator(".elementor-heading-title")
     .allTextContents();
   expect(allBooks.find((x) => x === booksName[2])).toBeTruthy();
+  const index = allBooks.findIndex((x) => x === booksName[2]);
+  const allPrice = await books
+    .locator("ins .woocommerce-Price-amount")
+    .allTextContents();
+  await expect(allPrice.find((x) => x === allPrice[index])).toBeTruthy();
 });
