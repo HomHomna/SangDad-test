@@ -75,7 +75,7 @@ test("test No. 10", async ({ page }) => {
   }
   await expect(page.locator(".xoo-wsc-ft-amt bdi")).toHaveText("400 ฿");
   await expect(page.locator(".xoo-wscb-count")).toHaveText("1");
-  await page.pause();
+  // await page.pause();
 });
 
 test.only("test No. 11 Payment Page", async ({ page }) => {
@@ -119,37 +119,39 @@ test.only("test No. 11 Payment Page", async ({ page }) => {
   await expect(amount).toHaveText("400 ฿");
   await page.locator("#menu-1-18869fb .menu-item-2778").click();
 
-  await page.locator(".wpforms-submit ").click()
-  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden()
+  await page.locator(".wpforms-submit ").click();
+  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden();
 
-  await page.locator("#wpforms-2869-field_1").fill("Playwright")
-  await page.locator(".wpforms-submit ").click()
-  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden()
+  await page.locator("#wpforms-2869-field_1").fill("Playwright");
+  await page.locator(".wpforms-submit ").click();
+  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden();
 
-  await page.locator("#wpforms-2869-field_1-last").fill("Test")
-  await page.locator(".wpforms-submit ").click()
-  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden()
+  await page.locator("#wpforms-2869-field_1-last").fill("Test");
+  await page.locator(".wpforms-submit ").click();
+  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden();
 
-  await page.locator("#wpforms-2869-field_3").fill("123456")
-  await page.locator(".wpforms-submit ").click()
-  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden()
+  await page.locator("#wpforms-2869-field_3").fill("123456");
+  await page.locator(".wpforms-submit ").click();
+  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden();
 
-  await page.locator("#wpforms-2869-field_2").fill("400")
-  await page.locator(".wpforms-submit ").click()
-  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden()
+  await page.locator("#wpforms-2869-field_2").fill("400");
+  await page.locator(".wpforms-submit ").click();
+  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden();
 
-  await page.locator("#wpforms-2869-field_4").click()
-  await page.locator(".flatpickr-day.today").click()
-  await page.locator(".wpforms-submit ").click()
+  await page.locator("#wpforms-2869-field_4").click();
+  await page.locator(".flatpickr-day.today").click();
+  await page.locator(".wpforms-submit ").click();
 
-  await page.locator("#wpforms-2869-field_4-time").click()
-  await page.locator("text=15:15").click()
-  await page.locator(".wpforms-submit ").click()
-  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden()
+  await page.locator("#wpforms-2869-field_4-time").click();
+  await page.locator("text=15:15").click();
+  await page.locator(".wpforms-submit ").click();
+  await expect(page.locator("#wpforms-confirmation-2869")).toBeHidden();
 
-  await page.setInputFiles("input[type='file']","./assets/dummy.jpg")
-  await page.locator(".wpforms-submit ").click()
-  await page.locator("#wpforms-confirmation-2869").first().waitFor()
-  await expect(page.locator("#wpforms-confirmation-2869")).toHaveText("แจ้งชำระเงินเรียบร้อยแล้ว")
-  await page.pause();
+  await page.setInputFiles("input[type='file']", "./assets/dummy.jpg");
+  await page.locator(".wpforms-submit ").click();
+  await page.locator("#wpforms-confirmation-2869").first().waitFor();
+  await expect(page.locator("#wpforms-confirmation-2869")).toHaveText(
+    "แจ้งชำระเงินเรียบร้อยแล้ว"
+  );
+  // await page.pause();
 });
