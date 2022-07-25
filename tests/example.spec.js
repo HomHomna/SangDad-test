@@ -51,8 +51,8 @@ test("search book อาหารจานเด็ด", async ({ page }) => {
 
 test.only("search สุขภาพ in search tag", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
-  await page.locator("input#dgwt-wcas-search-input-12c2").fill("สุขภาพ");
-  await page.locator("input#dgwt-wcas-search-input-12c2").press("Enter");
+  await page.locator("#dgwt-wcas-search-input-183c").fill("สุขภาพ");
+  await page.locator("#dgwt-wcas-search-input-183c").press("Enter");
   const books = page.locator("article[id*='post']");
   await books.first().waitFor();
   await expect(books).toHaveCount(12);
