@@ -53,7 +53,7 @@ test("test No. 10", async ({ page }) => {
   await expect(page.locator(".xoo-wsc-ft-amt bdi")).toHaveText("382 ฿");
   await page.goBack();
   await page.locator("#post-989").click();
-  await page.locator("button.single_add_to_cart_button").click({ delay: 500 });
+  await page.locator("button.single_add_to_cart_button").click({ delay: 300 });
   await expect(page.locator(".xoo-wscb-count")).toHaveText("2");
 
   const countBooks = await page.locator(".xoo-wsc-pname").count();
@@ -78,7 +78,7 @@ test("test No. 10", async ({ page }) => {
   // await page.pause();
 });
 
-test.only("test No. 11 Payment Page", async ({ page }) => {
+test("test No. 11 Payment Page", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
   await page.waitForLoadState("networkidle");
   await page.locator("[title*='ตำราอาหารยอดนิยม']").click();
