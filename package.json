@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/HomHomna/SangDad-test#readme",
   "dependencies": {
+    "parcel-bundler": "^1.12.5",
     "playwright-core": "^1.23.4"
   }
 }

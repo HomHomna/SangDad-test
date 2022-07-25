@@ -4,6 +4,7 @@ test("test No. 8", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
   await page.waitForLoadState("networkidle");
   await page.locator("[title*='ตำราอาหารยอดนิยม']").click();
+  await page.waitForLoadState("networkidle");
   await page.locator("#post-4814").click();
   // await page.pause();
   // await page.locator(".elementor-row").waitFor();
@@ -19,6 +20,7 @@ test("test No. 9", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
   await page.waitForLoadState("networkidle");
   await page.locator("[title*='ตำราอาหารยอดนิยม']").click();
+  await page.waitForLoadState("networkidle");
   await page.locator("#post-4814").click();
   await page.locator("button.single_add_to_cart_button").click({ delay: 400 });
   await expect(page.locator(".xoo-wsch-text")).toHaveText("Your Cart");
@@ -44,6 +46,7 @@ test("test No. 10", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
   await page.waitForLoadState("networkidle");
   await page.locator("[title*='ตำราอาหารยอดนิยม']").click();
+  await page.waitForLoadState("networkidle");
   await page.locator("#post-4814").click();
   await page.locator("button.single_add_to_cart_button").click({ delay: 300 });
   await expect(page.locator(".xoo-wsch-text")).toHaveText("Your Cart");
@@ -82,6 +85,7 @@ test("test No. 11 Payment Page", async ({ page }) => {
   await page.goto("https://www.sangdad.com/shop/");
   await page.waitForLoadState("networkidle");
   await page.locator("[title*='ตำราอาหารยอดนิยม']").click();
+  await page.waitForLoadState("networkidle");
   await page.locator("#post-4814").click();
 
   await page.locator("button.single_add_to_cart_button").click({ delay: 300 });
